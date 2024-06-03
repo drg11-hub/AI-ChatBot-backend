@@ -7,8 +7,8 @@ var fs = require('fs');
 
 // import logIn from './routes/authroutes';
 
-router.get('/health', (req, res) => {
-    res.send('OK')
+router.get('/', (req, res) => {
+    res.send('AI-ChatBot Backend Running!')
 });
 
 
