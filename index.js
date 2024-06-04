@@ -6,7 +6,7 @@ const bodyParser = require('body-parser')
 const authRoutes = require('./routes/authRoutes')
 const dotenv = require('dotenv');
 const chatRoutes = require('./routes/chatRoutes');
-
+const analyticsRoutes = require('./routes/analyticsRoutes'); // Import analytics routes
 
 dotenv.config();
 
@@ -19,12 +19,15 @@ if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'))
 }
 
-// app.use(cors())
+app.use(cors())
+
+//Deployment file-changes:
 const corsOptions = {
     origin: 'https://aichatbot-243h.onrender.com', // Replace with your frontend URL if different
     optionsSuccessStatus: 200,
 }
 app.use(cors(corsOptions))
+//Deployment file-changes end
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.urlencoded({extended: true}))
@@ -36,6 +39,7 @@ app.use(bodyParser.json())
 
 app.use('/api/auth', authRoutes);
 app.use('/api/chat', chatRoutes);
+app.use('/api/analytics', analyticsRoutes); // Add analytics routes
 
 // Add this route for the root URL
 app.get('/', (req, res) => {
