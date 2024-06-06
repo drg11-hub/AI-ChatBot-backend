@@ -124,4 +124,25 @@ router.get('/me', authMiddleware, async (req, res) => {
   }
 });
 
+// Reset Password Route
+router.post('/reset-password', async (req, res) => {
+  const { email, newPassword } = req.body;
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(400).json({ errors: ['User not found'] });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(newPassword, salt);
+    await user.save();
+
+    res.status(200).json({ message: 'Password reset successful!' });
+  } catch (error) {
+    res.status(500).json({ errors: ['Server error'] });
+  }
+});
+
 module.exports = router;
+
+// ----------google signup code:
