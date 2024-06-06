@@ -22,11 +22,11 @@ if (process.env.NODE_ENV === 'development') {
 app.use(cors())
 
 //Deployment file-changes:
-// const corsOptions = {
-//     origin: 'https://aichatbot-243h.onrender.com', // Replace with your frontend URL if different
-//     optionsSuccessStatus: 200,
-// }
-// app.use(cors(corsOptions))
+const corsOptions = {
+    origin: 'https://aichatbot-243h.onrender.com', // Replace with your frontend URL if different
+    optionsSuccessStatus: 200,
+}
+app.use(cors(corsOptions))
 //Deployment file-changes end
 
 app.use(bodyParser.urlencoded({ extended: false }))
